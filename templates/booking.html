@@ -1,0 +1,40 @@
+{% load static %}
+{% static 'images' as baseurl%}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bookings Page</title>
+  <link rel="stylesheet" href="{% static 'Stylesheets/style.css' %}">
+
+</head>
+
+<body>
+  <section id="nav" class="nav">
+    {% include 'navbar.html' %}
+  </section>
+  <section class="booking-page">
+    <div class="fixed-width">
+    <div class="books-container grid-row">
+      {% for book in books %}
+      <div class="book-1 flex-col book-shelf target-div" id ="target-div{{forloop.counter}}"> 
+        <div class="half-width shadow">
+          <img class="image" id="image{{forloop.counter}}"src="{{book.img.url}}" alt="">
+        </div>
+        <button class="buy-book"><a href="{% url 'book_details' book_id=book.id %}">View Details</a></button>
+      </div>
+      {% endfor %}
+    </div>
+    </div>
+
+
+  </section>
+  
+  <script src="{% static 'tinycolor.js' %}"></script>
+  <script src="{% static 'app.js' %}"></script>
+</body>
+
+</html>

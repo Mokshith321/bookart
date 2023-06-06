@@ -1,0 +1,42 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="{% static 'Stylesheets/style.css' %}">
+</head>
+<body>
+    <ul class="navbar flex-row fixed-width">
+      <div class="webname"><a href="/" class="{% if request.path == '' %}active{% endif %}" >Bookart</a>
+        </div>
+        <div class="hamburger-menu">
+          <div class="hamburger"></div>
+          <div class="hamburger"></div>
+          <div class="hamburger"></div>
+        </div>
+      <div class="items flex-row navbar-items">
+        {% if user.is_authenticated %}
+        <li> Hello, {{user}}</li>
+        {% endif %}
+        <li class="items"><a href="{% url 'booking' %}" class="{% if request.path == '/booking/' %}active{% endif %}" id="booking">Booking</a></li>
+        <li class="items"><a href="{% url 'renting' %}" class="{% if request.path == '/renting/renting' %}active{% endif %}" id="renting">Renting</a></li>
+        <li class="items"><a href="{% url 'about' %}" class="{% if request.path == '/about/' %}active{% endif %}"id="about">About Us</a></li>
+        {% if user.is_authenticated %}
+        <li class="items"><a href="{% url 'logout' %}" class="{% if request.path == '/logout' %}active{% endif %}"id="register">Logout</a></li>
+        {% else %}
+        <li class="items"><a href="{% url 'login' %}" class="{% if request.path == '/login' %}active{% endif %}"id="register">Login</a></li>
+        <li class="items"><a href="{% url 'register' %}" class="{% if request.path == '/register' %}active{% endif %}"id="register">Register</a></li>
+        {% endif %}
+      </div>
+    </ul>
+    <script>
+      document.querySelector('.hamburger-menu').addEventListener('click', function() {
+        document.querySelector('.navbar-items').classList.toggle('show');
+      });
+    </script>
+</body>
+</html>
+

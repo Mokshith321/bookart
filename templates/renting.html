@@ -1,0 +1,56 @@
+{% load static %}
+{% static 'images' as baseurl%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Renting Page</title>
+  <link rel="stylesheet" href="{% static 'Stylesheets/style.css' %}">
+</head>
+<body>
+  <section class="nav" id="nav">
+    {% include 'navbar.html' %}
+  </section>
+  <section class="renting-page">
+    <div class="fixed-width">
+      <div class="flex-row">
+        <div class="half-width flex-col book-containers">
+          <div class="heading">Your Books and Earnings</div>
+          <div class="heading">{{message}}</div>
+          {% for book in books %}
+          <div class="rented-book-shelf flex-row target-div rent-page-row" id="target-div1">
+            <div class="flex-row rent-page-row">
+            <div class="img-div">
+              <img id="image1" class="image" src="{{book.img.url}}" alt=""></div>
+            <div class="book-name">{{book.title}}</div>
+            </div>
+            <div class="money-earned">{{book.cost}}<span> /-</span></div>
+          </div>
+          {% endfor %}
+        </div>
+
+          <form action="renting" method="post"  enctype="multipart/form-data" class="half-width flex-col book-containers">
+            {% csrf_token %}
+          <div class="heading">ADD NEW BOOK</div>
+          <div class="flex-row width-100 rent-page-row"><label for="Name">Book Name : </label>
+          <input type="text" name="name" required></div>
+          <div class="flex-row width-100 rent-page-row"><label for="Age">Cost Per Week : </label>
+          <input type="text" name="cost" required></div>
+          <div class="flex-row width-100 rent-page-row"><label for="file-upload">Book Photo : </label>
+          <input type="file" id="file-upload" name="image" accept="image/*" required></div>
+          <div class="flex-row width-100 rent-page-row">
+            <label for="my-textarea">Description : </label>
+                <textarea id="my-textarea" name="message" rows="4" cols="35"></textarea>
+          </div>
+          <button type="Submit">ADD BOOK</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <script src="{% static 'tinycolor.js' %}"></script>
+  <script src="{% static 'app.js' %}"></script>
+</body>
+</html>
