@@ -10,13 +10,7 @@
 </head>
 <body>
     <ul class="navbar flex-row fixed-width">
-      <div class="webname"><a href="/" class="{% if request.path == '' %}active{% endif %}" >Bookart</a>
-        </div>
-        <div class="hamburger-menu">
-          <div class="hamburger"></div>
-          <div class="hamburger"></div>
-          <div class="hamburger"></div>
-        </div>
+      <div class="webname"><a href="/" class="{% if request.path == '' %}active{% endif %}" >Bookart</a></div>
       <div class="items flex-row navbar-items">
         {% if user.is_authenticated %}
         <li> Hello, {{user}}</li>
@@ -31,10 +25,21 @@
         <li class="items"><a href="{% url 'register' %}" class="{% if request.path == '/register' %}active{% endif %}"id="register">Register</a></li>
         {% endif %}
       </div>
+      <div class="hamburger-menu">
+        <div class="hamburger line-1"></div>
+        <div class="hamburger line-2"></div>
+        <div class="hamburger line-3"></div>
+      </div>
     </ul>
     <script>
+      var line1 = document.querySelector('.line-1');
+      var line3 = document.querySelector('.line-3');
+      var line2 = document.querySelector('.line-2');
       document.querySelector('.hamburger-menu').addEventListener('click', function() {
         document.querySelector('.navbar-items').classList.toggle('show');
+        line1.classList.toggle('rotate');
+        line2.classList.toggle('hide');
+        line3.classList.toggle('rotate');
       });
     </script>
 </body>
