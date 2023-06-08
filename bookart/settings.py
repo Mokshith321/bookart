@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 import os
 from pathlib import Path
 import mysql.connector
+import dj_database_url
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -27,7 +28,7 @@ SECRET_KEY = 'django-insecure-*+#o%r&@3v=jx^*ivjtc&rie5d@xi_zd(=_!jj1i%u%wqyh(5e
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['.verce.app']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,16 +83,22 @@ PAYMENT_GATEWAY_API_SECRET = "AmaJxnLdHO87uVdbJWO0JbyA"
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'bookart_database',
-        'USER': 'root',
-        'PASSWORD': 'Msdhoni@321',
-        'HOST':'localhost'
-    }
-}
 
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'bookart_database',
+#         'USER': 'postgres',
+#         'PASSWORD': 'Msdhoni@321',
+#         'HOST':'localhost'
+#     }
+# }
+
+DATABASES ={
+    'default':dj_database_url.parse(os.environ.get("DATABASE_URL"))
+    
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/4.2/ref/settings/#auth-password-validators
